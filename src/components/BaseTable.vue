@@ -48,6 +48,16 @@ export default {
       type: String,
       default: '',
       description: '<tbody> css classes'
+    },
+    perPage: {
+      type: Number,
+      default: 5,
+      description: ''
+    },
+    currentPage: {
+      type: Number,
+      default: 1,
+      description: ''
     }
   },
   computed: {
@@ -70,4 +80,5 @@ export default {
   }
 };
 </script>
-<style></style>
+<style>
+</style>

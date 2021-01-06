@@ -3,10 +3,10 @@
     <div class="card-header border-0">
       <div class="row align-items-center">
         <div class="col">
-          <h3 class="mb-0">Page visits</h3>
+          <h3 class="mb-0">Informe de visitas</h3>
         </div>
         <div class="col text-right">
-          <a href="#!" class="btn btn-sm btn-primary">See all</a>
+          <a href="#!" class="btn btn-sm btn-primary">Ver todos</a>
         </div>
       </div>
     </div>
@@ -15,10 +15,10 @@
       <base-table thead-classes="thead-light"
                   :data="tableData">
         <template slot="columns">
-          <th>Page name</th>
-          <th>Visitors</th>
-          <th>Unique users</th>
-          <th>Bounce rate</th>
+          <th>Página</th>
+          <th>Visitantes</th>
+          <th>Usuarios únicos</th>
+          <th>% de rebote</th>
         </template>
 
         <template slot-scope="{row}">

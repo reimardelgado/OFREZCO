@@ -12,7 +12,7 @@
            :class="[{'modal-notice': type === 'notice'}, modalClasses]">
         <div class="modal-content" :class="[gradient ? `bg-gradient-${gradient}` : '',modalContentClasses]">
 
-          <div class="modal-header" :class="[headerClasses]" v-if="$slots.header">
+          <div class="modal-header bg-default" :class="[headerClasses]" v-if="$slots.header">
             <slot name="header"></slot>
             <slot name="close-button">
               <button type="button"
@@ -113,5 +113,9 @@ export default {
 <style>
 .modal.show {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal h5 {
+  color: #fff !important;
 }
 </style>

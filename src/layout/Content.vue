@@ -1,5 +1,5 @@
 <template>
-  <div class="content">
+  <div class="content">  
     <FadeTransition :duration="200" mode="out-in">
       <!-- your content here -->
       <router-view></router-view>

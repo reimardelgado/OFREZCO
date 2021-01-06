@@ -4,41 +4,77 @@ import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
 Vue.use(Router)
 
+import { LoginRoute, RecuperarRoute, CambiarRoute } from '@/views/autenticacion/router'
+const routerAuthLayout = {
+  path: '/',
+  component: AuthLayout,
+  children: [
+    LoginRoute,
+    RecuperarRoute,
+    CambiarRoute
+  ]
+}
+
+import { PrincipalRoute } from '@/views/Dashboard/router'
+import { PlanListRoute, PlanEditarRoute, PlanNuevoRoute } from '@/views/plan/router'
+import { CategoriaRoute, CategoriaNuevaRoute, CategoriaEditarRoute } from '@/views/categoria/router'
+import { CuentaRoute, CuentaNuevaRoute, CuentaEditarRoute, CuentaProfileRoute } from '@/views/cuenta/router'
+import { ProductoEditarRoute, ProductoNuevaRoute, ProductoRoute } from './views/producto/router'
+import { ServicioEditarRoute, ServicioNuevaRoute, ServicioRoute } from './views/servicio/router'
+
+const routerDashLayout = {
+  path: '/',
+  component: DashboardLayout,
+  children: [
+    PrincipalRoute,
+
+    PlanListRoute,
+    PlanNuevoRoute,
+    PlanEditarRoute,
+
+    CuentaRoute,
+    CuentaNuevaRoute,
+    CuentaEditarRoute,
+    CuentaProfileRoute,
+
+    CategoriaRoute,
+    CategoriaEditarRoute,
+    CategoriaNuevaRoute,
+
+    ProductoRoute,
+    ProductoNuevaRoute,
+    ProductoEditarRoute,
+
+    ServicioRoute,
+    ServicioNuevaRoute,
+    ServicioEditarRoute
+  ]
+}
+
 export default new Router({
   linkExactActiveClass: 'active',
   routes: [
+    routerAuthLayout,
+    routerDashLayout,
     {
       path: '/',
       redirect: 'dashboard',
       component: DashboardLayout,
       children: [
         {
-          path: '/dashboard',
-          name: 'dashboard',
-          // route level code-splitting
-          // this generates a separate chunk (about.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          component: () => import(/* webpackChunkName: "demo" */ './views/Dashboard.vue')
-        },
-        {
           path: '/icons',
           name: 'icons',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Icons.vue')
-        },
-        {
-          path: '/profile',
-          name: 'profile',
-          component: () => import(/* webpackChunkName: "demo" */ './views/UserProfile.vue')
+          component: () => import( /* webpackChunkName: "demo" */ './views/Icons.vue')
         },
         {
           path: '/maps',
           name: 'maps',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Maps.vue')
+          component: () => import( /* webpackChunkName: "demo" */ './views/Maps.vue')
         },
         {
           path: '/tables',
           name: 'tables',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Tables.vue')
+          component: () => import( /* webpackChunkName: "demo" */ './views/Tables.vue')
         }
       ]
     },
@@ -48,14 +84,9 @@ export default new Router({
       component: AuthLayout,
       children: [
         {
-          path: '/login',
-          name: 'login',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Login.vue')
-        },
-        {
           path: '/register',
           name: 'register',
-          component: () => import(/* webpackChunkName: "demo" */ './views/Register.vue')
+          component: () => import( /* webpackChunkName: "demo" */ './views/Register.vue')
         }
       ]
     }

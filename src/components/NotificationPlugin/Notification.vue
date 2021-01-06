@@ -67,7 +67,7 @@
       },
       horizontalAlign: {
         type: String,
-        default: 'right',
+        default: 'center',
         validator: value => {
           let acceptedValues = ['left', 'center', 'right'];
           return acceptedValues.indexOf(value) !== -1;

@@ -9,17 +9,18 @@
         <sidebar-item
           :link="{
             name: 'Dashboard',
-            icon: 'ni ni-tv-2 text-primary',
-            path: '/dashboard'
+            icon: 'ni ni-tv-2 text-red',
+            path: '/admin/dashboard'
           }"
         />
 
-        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-blue', path: '/icons'}"/>
-        <sidebar-item :link="{name: 'Maps', icon: 'ni ni-pin-3 text-orange', path: '/maps'}"/>
-        <sidebar-item :link="{name: 'User Profile', icon: 'ni ni-single-02 text-yellow', path: '/profile'}"/>
-        <sidebar-item :link="{name: 'Tables', icon: 'ni ni-bullet-list-67 text-red', path: '/tables'}"/>
-        <sidebar-item :link="{name: 'Login', icon: 'ni ni-key-25 text-info', path: '/login'}"/>
-        <sidebar-item :link="{name: 'Register', icon: 'ni ni-circle-08 text-pink', path: '/register'}"/>
+        <sidebar-item :link="{name: 'Productos', icon: 'ni ni-shop text-red', path: '/admin/products'}"/>
+        <sidebar-item :link="{name: 'Servicios', icon: 'ni ni-delivery-fast text-red', path: '/admin/services'}"/>
+        <sidebar-item :link="{name: 'Categorías', icon: 'ni ni-archive-2 text-red', path: '/admin/categories'}"/>
+        <sidebar-item :link="{name: 'Cuentas', icon: 'ni ni-key-25 text-red', path: '/admin/accounts'}"/>
+        <sidebar-item :link="{name: 'Planes', icon: 'ni ni-bullet-list-67 text-red', path: '/admin/plans'}"/>
+        <sidebar-item :link="{name: 'Mi Perfil', icon: 'ni ni-single-02 text-red', path: '/admin/account/profile'}"/>                
+        <sidebar-item :link="{name: 'Icons', icon: 'ni ni-planet text-red', path: '/icons'}"/>
 
       </template>
     </side-bar>
@@ -27,25 +28,25 @@
       <dashboard-navbar></dashboard-navbar>
 
       <div @click="toggleSidebar">
-        <fade-transition :duration="200" origin="center top" mode="out-in">
+        <!-- <fade-transition :duration="100" origin="center top" mode="out-in"> -->
           <!-- your content here -->
           <router-view></router-view>
-        </fade-transition>
-        <content-footer v-if="!$route.meta.hideFooter"></content-footer>
+        <!-- </fade-transition> -->
+        <!-- <content-footer v-if="!$route.meta.hideFooter"></content-footer> -->
       </div>
     </div>
   </div>
 </template>
 <script>
   import DashboardNavbar from './DashboardNavbar.vue';
-  import ContentFooter from './ContentFooter.vue';
-  import { FadeTransition } from 'vue2-transitions';
+  // import ContentFooter from './ContentFooter.vue';
+  // import { FadeTransition } from 'vue2-transitions';
 
   export default {
     components: {
       DashboardNavbar,
-      ContentFooter,
-      FadeTransition
+      // ContentFooter,
+      //FadeTransition
     },
     data() {
       return {
