@@ -1,127 +1,219 @@
 <template>
   <div>
-    <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-danger">
-      <!-- Card stats -->
-    </base-header>
-
     <div class="container-fluid mt--7">
-      <div class="card shadow">
-        <div
-          class="card-header border-0"
-        >
-          <div class="row align-items-center">
-            <div class="col">
-              <h3 class="mb-0">
-                Nuevo producto
-              </h3>
+      <div class="row">
+        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col-xl-12">
+                  <h3 class="mb-0">Cargar foto</h3>
+                </div>
+              </div>
+              <hr />
+            </div>
+            <div class="row justify-content-center">
+              <div class="col-xl-12">
+                
+                <div height="450px" class="imagePreviewWrapper">
+                  <picture-input
+                    ref="pictureInput"
+                    width="400"
+                    height="400"
+                    margin="16"
+                    accept="image/jpeg,image/png"
+                    size="10"
+                    button-class="btn"
+                    :custom-strings="{
+                      upload: '<h1>Avatar!</h1>',
+                      drag: 'Drag an image or <br>click here to select a file',
+                      change: 'Cambiar', // Text only
+                      remove: 'Remove Photo',
+                      select: 'Select a Photo', // Text only
+                      selected: '<p>Photo successfully selected!</p>', // HTML allowed
+                      fileSize: 'El tamaño de la imagen excede el límite', // Text only
+                      fileType: 'Archivo no soportado.', // Text only
+                      aspect: 'Landscape/Portrait', // Text only
+                    }"
+                    @change="onChange"
+                  >
+                  </picture-input>
+                </div>
+              </div>
             </div>
           </div>
-          <hr />
-          <form role="form">
-            <div class="row">
-              <div class="col-xl-12">
-                <base-input
-                  class="input-group-alternative mb-3"
-                    placeholder="Descripción"
-                >
-                </base-input>
+        </div>
+        <div class="col-xl-8 order-xl-1">
+          <div class="card shadow">
+            <div class="card-header border-0">
+              <div class="row align-items-center">
+                <div class="col">
+                  <h3 class="mb-0">Nuevo producto</h3>
+                </div>
               </div>
-              <div class="col-xl-6">
-                <base-input
-                  type="email"
-                  class="input-group-alternative mb-3"
-                  placeholder="Correo electrónico"
-                >
-                </base-input>
-              </div>
-              <div class="col-xl-6 col-lg-6">
-                <base-input
-                  type="password"
-                  class="input-group-alternative mb-3"
-                  placeholder="Contraseña"
-                >
-                </base-input>
-              </div>
-              <div class="col-xl-6 col-lg-6">
-                <b-form-select
-                  v-model="selected"
-                  :options="options"
-                  class="input-group-alternative mb-3"
-                >
-                </b-form-select>
-              </div>
-              <div class="col-xl-6 col-lg-6">
-                <base-input
-                  class="input-group-alternative mb-3"
-                  placeholder="Ciudad"
-                >
-                </base-input>
-              </div>
-              <div class="col-xl-12">
-                <base-input
-                  class="input-group-alternative mb-3"
-                  placeholder="Dirección"
-                >
-                </base-input>
-              </div>
-              <div class="col-xl-6">
-                <base-input
-                  type="phone"
-                  class="input-group-alternative mb-3"
-                  placeholder="Teléfono"
-                >
-                </base-input>
-              </div>
-              <div class="col-xl-6 col-lg-6">
-                <base-input
-                  class="input-group-alternative mb-3"
-                  placeholder="Modalidad"
-                >
-                </base-input>
-              </div>
+              <hr />
+              <form role="form">
+                <div class="row">
+                  <div class="col-xl-6 col-lg-6">
+                    <base-input
+                      class="input-group-alternative mb-3"
+                      placeholder="Nombre"
+                      v-model="model.name"
+                    >
+                    </base-input>
+                  </div>
+                  <div class="col-xl-6 col-lg-6">
+                    <base-input
+                      type="number"
+                      class="input-group-alternative mb-3"
+                      placeholder="Cantidad"
+                      v-model="model.amount"
+                    >
+                    </base-input>
+                  </div>
+                  <div class="col-xl-6 col-lg-6">
+                    <base-input
+                      class="input-group-alternative mb-3"
+                      placeholder="Precio"
+                      v-model="model.price"
+                    >
+                    </base-input>
+                  </div>
+                  <div class="col-xl-6 col-lg-6">
+                    <base-input
+                      class="input-group-alternative mb-3"
+                      placeholder="Descuento (%)"
+                      v-model="model.discount"
+                    >
+                    </base-input>
+                  </div>
+                  <div class="col-xl-6 col-lg-6">
+                    <base-input
+                      class="input-group-alternative mb-3"
+                      placeholder="Impuesto"
+                      v-model="model.tax"
+                    >
+                    </base-input>
+                  </div>
+                  <div class="col-xl-6 col-lg-6">
+                    <base-input
+                      class="input-group-alternative mb-3"
+                      placeholder="Descripción corta"
+                      v-model="model.description"
+                    >
+                    </base-input>
+                  </div>
+                  <div class="col-xl-12">
+                    <textarea
+                        rows="4"
+                        class="form-control form-control-alternative"
+                        placeholder="Descripción"
+                        v-model="model.largeDescription"
+                      >
+                        A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.
+                    </textarea>
+                  </div>
+                </div>
+                <div class="text-center">
+                  <base-button
+                    type="secondry"
+                    @click="cancelar()"
+                    class="my-4"
+                    size="sm"
+                    >Cancelar</base-button
+                  >
+                  <base-button
+                    type="secondary"
+                    @click="guardar()"
+                    class="my-4"
+                    size="sm"
+                    >Guardar</base-button
+                  >
+                </div>
+              </form>
             </div>
-            <div class="text-center">
-              <base-button
-                type="secondry"
-                @click="cancelar()"
-                class="my-4"
-                size="sm"
-                >Cancelar</base-button
-              >
-              <base-button
-                type="secondary"
-                @click="guardar()"
-                class="my-4"
-                size="sm"
-                >Guardar</base-button
-              >
-            </div>
-          </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { mapActions } from "vuex";
+import PictureInput from "vue-picture-input";
 export default {
-  components: {},
+  components: {
+    PictureInput    
+  },
   data() {
     return {
-      selected: null,
-      options: [
-        { value: null, text: "Provincia" },
-        { value: "1", text: "Pichincha" },
-      ],
+      model: {
+        id: null,
+        name: null,
+        price: null,
+        discount: null,
+        description: null,
+        largeDescription: null,
+        tax: null,
+        amount: null,
+        stock: null,
+        image: null,
+        accountId: null,
+        evaluation: null,
+        state:null,
+        createdDate: new Date(),
+      },
+      previewImage: null,
     };
   },
   methods: {
+    ...mapActions(["saveProduct"]),
     guardar() {
-      this.$router.push("/admin/products");
+      this.model.userName = this.model.email;
+      this.saveProduct(this.model).then((result) => {
+        console.log(result);
+        if (result.data.error == 0) {
+          this.$notify({
+            type: "success",
+            title: "Producto creado correctamente.",
+          });
+          this.$router.push("/admin/products");
+        } else {
+          this.$notify({
+            type: "danger",
+            title: result.data.msg,
+          });
+        }
+      });
     },
     cancelar() {
       this.$router.push("/admin/products");
     },
+    onChange(image) {
+      this.$notify({
+            type: "success",
+            title: "Imagen cargada correctamente!.",
+          });
+      if (image) {
+        this.image = image;
+      } else {
+        this.$notify({
+            type: "danger",
+            title: image.fileType,
+          });
+      }
+    },
   }
 };
 </script>
-<style></style>
+<style>
+.imagePreviewWrapper {
+  width: 250px;
+  height: 250px;
+  display: block;
+  cursor: pointer;
+  margin: 0 auto 30px;
+  background-size: cover;
+  background-position: center center;
+}
+</style>

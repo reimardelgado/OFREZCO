@@ -97,6 +97,7 @@ export default {
   },
   mounted() {
     this.reload();
+    console.log(this.categories)
   },
   data() {
     return {
@@ -127,6 +128,7 @@ export default {
         page: this.pagination.page,
         pageSize: this.pagination.perPage,
       }).then((res) => {
+        console.log(res)
         this.pageCount = res.totalPages;
         this.pagination.page = res.currentPage;
         this.pagination.perPage = res.itemsPerPage;

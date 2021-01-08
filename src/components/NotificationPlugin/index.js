@@ -4,8 +4,8 @@ const NotificationStore = {
   state: [], // here the notifications will be added
   settings: {
     overlap: false,
-    verticalAlign: 'top',
-    horizontalAlign: 'right',
+    verticalAlign: 'bottom',
+    horizontalAlign: 'center',
     type: 'info',
     timeout: 5000,
     closeOnClick: true,

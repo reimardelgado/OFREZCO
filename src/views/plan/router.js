@@ -9,7 +9,7 @@ export const PlanListRoute = {
     name: 'planes',
     component: planes,
     meta: {
-        //requiresAuth: true
+        requiresAuth: true
     },
 }
 export const PlanNuevoRoute = {
@@ -17,7 +17,7 @@ export const PlanNuevoRoute = {
     name: 'nuevoPlan',
     component: planNuevo,
     meta: {
-        //requiresAuth: true
+        requiresAuth: true
     },
 }
 export const PlanEditarRoute = {

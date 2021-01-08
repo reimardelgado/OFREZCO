@@ -24,12 +24,15 @@
 
       </template>
     </side-bar>
-    <div class="main-content" :data="sidebarBackground">
+    <div class="main-content content-layout" :data="sidebarBackground">
       <dashboard-navbar></dashboard-navbar>
 
       <div @click="toggleSidebar">
         <!-- <fade-transition :duration="100" origin="center top" mode="out-in"> -->
           <!-- your content here -->
+          <base-header class="pb-6 pb-8 pt-3 pt-md-6 bg-gradient-default">
+            <!-- Card stats -->
+          </base-header>
           <router-view></router-view>
         <!-- </fade-transition> -->
         <!-- <content-footer v-if="!$route.meta.hideFooter"></content-footer> -->
@@ -63,4 +66,9 @@
   };
 </script>
 <style lang="scss">
+.content-layout {
+  background: #001b94;
+  min-height: 100vh;
+  padding-bottom: 50px;
+}
 </style>

@@ -30,6 +30,7 @@ import 'vue-toast-notification/dist/theme-sugar.css';
 import Nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+import moment from 'moment'
 Vue.use(require('vue-moment'));
 
 Vue.config.productionTip = false
@@ -50,11 +51,8 @@ Nprogress.configure({
 })
 
 router.beforeEach((to, from, next) => {  
-  console.log(to)
    if (to.matched.some(record => record.meta.requiresAuth)) {
-    console.log(localStorage.getItem('expirationTime'))
-    console.log(new Date())
-    if (localStorage.getItem('accessToken') && localStorage.getItem('expirationTime') > new Date()) {
+    if (localStorage.getItem('accessToken') && localStorage.getItem('expirationTime') > moment().format()) {
        next()
     }else{
       localStorage.clear()

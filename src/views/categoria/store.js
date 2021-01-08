@@ -35,7 +35,7 @@ const actions = {
     getCategorias(context,params){
         context.commit('showLoading')
         return CategoriaService.getCategories(params)
-        .then((result) => {
+        .then((result) => {            
             if (result.data.error == 0) {                  
                 const items = result.data.data
                 context.commit('loadData', {items}) 

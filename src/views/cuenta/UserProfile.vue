@@ -1,10 +1,5 @@
 <template>
   <div>
-    <base-header
-      class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center bg-gradient-default"
-    >
-    </base-header>
-
     <div class="container-fluid mt--7">
       <div class="row">
         <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
@@ -14,7 +9,7 @@
                 <div class="card-profile-image">
                   <a href="#">
                     <img
-                      src="img/theme/team-1-800x800.png"
+                      src="/img/theme/team-1-800x800.png"
                       class="rounded-circle"
                     />
                   </a>

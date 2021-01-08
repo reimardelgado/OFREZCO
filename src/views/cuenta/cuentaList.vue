@@ -145,7 +145,7 @@ export default {
       });
     },
     suscripciones(id){
-this.getAccount(id);
+      this.getAccount(id);
       this.$router.push({
         name: "editarCuenta",
         params: {

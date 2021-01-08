@@ -6,6 +6,11 @@
           <div class="text-center text-muted mb-4">
             <small>Entre sus credenciales</small>
           </div>
+          <div v-if="mensaje != ''" class="divError">
+             <base-alert type="primary">
+                  {{mensaje}}
+              </base-alert>
+          </div>
           <form role="form">
             <base-input
               class="input-group-alternative mb-3"
@@ -23,7 +28,7 @@
               v-model="model.password"
             >
             </base-input>
-
+            
             <base-checkbox class="custom-control-alternative">
               <span class="text-muted">Recordar contraseña</span>
             </base-checkbox>
@@ -31,7 +36,7 @@
               <base-button type="primary" @click="loginUser()" class="my-4"
                 >Entrar</base-button
               >
-            </div>
+            </div>            
           </form>
         </div>
       </div>
@@ -54,12 +59,16 @@ export default {
       'profile'
     ])
   },
+  mounted() {
+
+  },
   data() {
     return {
       model: {
         email: "",
         password: "",
       },
+      mensaje: ''
     };
   },
   methods: {
@@ -69,10 +78,18 @@ export default {
           email: this.model.email,
           password: this.model.password,
         })
-        .then(result => {
-          if (result.status == 200) {
+        .then(result => {          
+          if (result.data.error == 0) {
             this.$router.push("/admin/dashboard");
+          }else{            
+              this.mensaje= result.data.msg
           }
+        })
+        .catch(() => {
+          this.$notify({
+              type: "danger",
+              title: "Error en validación de datos",
+            });
         })
         .finally(() => {});
     },
@@ -80,4 +97,8 @@ export default {
 };
 </script>
 <style>
+.divError {
+  font-size: 8px;
+  text-align: center;
+}
 </style>

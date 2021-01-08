@@ -70,6 +70,7 @@ const actions = {
         localStorage.clear()
         return AuthService.login(model.email, model.password)
             .then((result) => {
+                console.log("f")
                 if (result.data.error == 0) {
                     localStorage.setItem('accessToken', result.data.data.token)
                     localStorage.setItem('expirationTime', result.data.data.expiration)
@@ -83,6 +84,9 @@ const actions = {
                         })
                 }
                 return result
+            })
+            .catch(error => {
+                return error
             })
     },
     getProfile(context) {

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import DashboardLayout from '@/layout/DashboardLayout'
 import AuthLayout from '@/layout/AuthLayout'
+//import MyLayout from '@/layout/MyLayout'
 Vue.use(Router)
 
 import { LoginRoute, RecuperarRoute, CambiarRoute } from '@/views/autenticacion/router'
@@ -53,6 +54,7 @@ const routerDashLayout = {
 
 export default new Router({
   linkExactActiveClass: 'active',
+  mode: "history",
   routes: [
     routerAuthLayout,
     routerDashLayout,

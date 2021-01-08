@@ -59,7 +59,7 @@
       icon: String,
       verticalAlign: {
         type: String,
-        default: 'top',
+        default: 'bottom',
         validator: value => {
           let acceptedValues = ['top', 'bottom'];
           return acceptedValues.indexOf(value) !== -1;

@@ -46,8 +46,8 @@ const actions = {
                 context.commit('loadData', {items})
             }
         })
-        .catch((err) =>{
-            console.log(err)
+        .catch(() =>{
+
         })
         .finally(() => {
             context.commit('hideLoading')

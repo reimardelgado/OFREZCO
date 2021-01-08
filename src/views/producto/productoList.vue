@@ -22,13 +22,13 @@
         :class="type === 'dark' ? 'table-dark' : ''"
         :thead-classes="type === 'dark' ? 'thead-dark' : 'thead-light'"
         tbody-classes="list"
-        :data="tableData"
+        :data="products"
       >
         <template slot="columns">
           <th width="30%">Nombre</th>
-          <th width="15%">Usuario</th>
-          <th width="15%">Correo</th>
-          <th width="15%">Modalidad</th>
+          <th width="15%">Cantidad</th>
+          <th width="15%">Precio</th>
+          <th width="15%">Descripción</th>
           <th width="15%">Estado</th>
           <th width="10%"></th>
         </template>
@@ -37,22 +37,34 @@
           <th scope="row">
             <div class="media align-items-center">
               <div class="media-body">
-                <span class="name mb-0 text-sm">{{ row.nombre }}</span>
+                <span class="name mb-0 text-sm">{{ row.name }}</span>
               </div>
             </div>
           </th>
           <td class="budget">
-            {{ row.usuario }}
+            <span>
+              Total: {{ row.amount }}
+            </span>
+            <span> 
+              Quedan: {{ row.stock }} 
+            </span>
           </td>
           <td class="budget">
-            {{ row.correo }}
+            <span> ${{ formatPrice(row.price) }} USD </span>
+            <div v-if="row.discount > 0">
+              <span style="text-decoration:line-through">${{ formatPrice(row.price) }} USD </span>
+              <span>${{ formatPrice(row.price) - formatPrice(row.discount) }} USD </span>
+            </div>            
+            <div>
+              <span>${{ formatPrice(row.price) }} USD </span>
+            </div>
           </td>
           <td class="budget">
-            {{ row.modalidad }}
+            {{ row.description }}
           </td>
 
           <td class="budget">
-            {{ row.estado }}
+            {{ row.state }}
           </td>
 
           <td class="text-right">
@@ -70,7 +82,7 @@
               <i class="ni ni-fat-delete"></i
             ></base-button>
           </td>
-        </template>
+        </template>        
       </base-table>
     </div>
 
@@ -78,15 +90,19 @@
       class="card-footer d-flex justify-content-end"
       :class="type === 'dark' ? 'bg-transparent' : ''"
     >
-      <!-- <base-pagination total="30"></base-pagination> -->
+      <base-pagination
+        :page-count="pageCount"
+        :per-page="pagination.perPage"
+        size="sm"
+        v-model="pagination.page"
+        @input="paginar"
+      ></base-pagination>
     </div>
-
-    <!--  -->
-
 
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex';
 export default {
   name: "producto-list",
   props: {
@@ -95,28 +111,39 @@ export default {
     },
     title: String,
   },
-  computed: {},
+  computed: {
+    ...mapGetters(["products"])
+  },
   data() {
     return {
-      tableData: [
-        {
-          id: "dfd156",
-          nombre: "Cuenta 1",
-          usuario: "cuenta1",
-          correo: "cuenta@gmail.com",
-          modalidad: "Ambos",
-          estado: "Activo",
-        }
-      ],
+      pagination: {
+        page: 1,
+        perPage: 5,
+      },
+      pageCount: 0,
     };
   },
   methods: {
+    ...mapActions(["getProducts", "getProduct"]),    
     nuevo(){
-      this.$router.push('/product_new')
+      this.$router.push('/admin/product_new')
     },
     editar(id){
       this.$router.push({path: `/product_edit/${id}`})
-    }
+    },
+    reload() {
+      this.getProducts({
+        page: this.pagination.page,
+        pageSize: this.pagination.perPage,
+      }).then((res) => {
+        this.pageCount = res.totalPages;
+        this.pagination.page = res.currentPage;
+        this.pagination.perPage = res.itemsPerPage;
+      });
+    },
+    paginar() {
+      this.reload();
+    },
   },
 };
 </script>

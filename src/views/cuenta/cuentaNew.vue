@@ -1,9 +1,5 @@
 <template>
   <div>
-    <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-danger">
-      <!-- Card stats -->
-    </base-header>
-
     <div class="container-fluid mt--7">
       <div class="row">
         <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
@@ -18,14 +14,7 @@
             </div>
             <div class="row justify-content-center">
               <div class="col-xl-12">
-                <!-- <div
-                    class="imagePreviewWrapper rounded-circle"
-                    height="400px"
-                    :style="{ 'background-image': `url(${previewImage})` }"
-                    @click="selectImage"
-                  ></div>
-
-                  <input ref="fileInput" type="file" @input="pickFile" /> -->
+                
                 <div height="450px" class="imagePreviewWrapper">
                   <picture-input
                     ref="pictureInput"
@@ -179,8 +168,8 @@ import { mapActions } from "vuex";
 import PictureInput from "vue-picture-input";
 export default {
   components: { PictureInput },
-  data() {
-    return {
+    data() {
+      return {
       selected: "0",
       paises: [
         { value: "0", text: "Países" },
@@ -221,7 +210,7 @@ export default {
         if (result.data.error == 0) {
           this.$notify({
             type: "success",
-            title: "Cuenta actualizada correctamente.",
+            title: "Cuenta creada correctamente.",
           });
           this.$router.push("/admin/accounts");
         } else {
@@ -238,7 +227,7 @@ export default {
     onChange(image) {
       this.$notify({
             type: "success",
-            title: "New picture selected!.",
+            title: "Imagen cargada correctamente!.",
           });
       if (image) {
         console.log("Picture loaded.");

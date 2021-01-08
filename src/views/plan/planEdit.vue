@@ -1,9 +1,5 @@
 <template>
   <div>
-    <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-danger">
-      <!-- Card stats -->
-    </base-header>
-
     <div class="container-fluid mt--7">
       <div class="card shadow">
         <div class="card-header border-0">

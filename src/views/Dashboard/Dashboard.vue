@@ -1,12 +1,12 @@
 <template>
     <div>
-        <base-header class="pb-6 pb-8 pt-5 pt-md-8 bg-gradient-primary">
-            <!-- Card stats -->
+        <!--Charts-->
+        <div class="container-fluid mt--7">
             <div class="row">
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Total Productos"
-                                type="gradient-red"
-                                sub-title="10"
+                                type="primary"
+                                :sub-title="stadistic.totalProducts"
                                 icon="ni ni-active-40"
                                 class="mb-4 mb-xl-0"
                     >
@@ -14,8 +14,8 @@
                 </div>
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Total Servicios"
-                                type="gradient-orange"
-                                sub-title="5"
+                                type="primary"
+                                :sub-title="stadistic.totalServices"
                                 icon="ni ni-chart-pie-35"
                                 class="mb-4 mb-xl-0"
                     >
@@ -23,8 +23,8 @@
                 </div>
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Ventas Productos"
-                                type="gradient-green"
-                                sub-title="924"
+                                type="primary"
+                                :sub-title="stadistic.salesProducts"
                                 icon="ni ni-money-coins"
                                 class="mb-4 mb-xl-0"
                     >
@@ -33,19 +33,15 @@
                 </div>
                 <div class="col-xl-3 col-lg-6">
                     <stats-card title="Órdenes Servicios"
-                                type="gradient-info"
-                                sub-title="49"
+                                type="primary"
+                                :sub-title="stadistic.salesServices"
                                 icon="ni ni-chart-bar-32"
                                 class="mb-4 mb-xl-0"
                     >
                     </stats-card>
                 </div>
             </div>
-        </base-header>
-
-        <!--Charts-->
-        <div class="container-fluid mt--7">
-            <div class="row">
+            <div class="row mt-5">
                 <div class="col-xl-8 mb-5 mb-xl-0">
                     <card type="secondry" header-classes="bg-transparent">
                         <div slot="header" class="row align-items-center">
@@ -119,15 +115,19 @@
     </div>
 </template>
 <script>
-  // Charts
+  import { mapGetters, mapActions } from 'vuex';
+// Charts
   import * as chartConfigs from '@/components/Charts/config';
   import LineChart from '@/components/Charts/LineChart';
   import BarChart from '@/components/Charts/BarChart';
 
   // Tables
   import PageVisitsTable from './PageVisitsTable';
-
-  export default {
+  
+  export default {    
+    computed: {
+      ...mapGetters(["stadistic"])
+    },
     components: {
       LineChart,
       BarChart,
@@ -159,6 +159,10 @@
       };
     },
     methods: {
+      ...mapActions(["getStadistic"]),
+      reload(){
+        this.getStadistic()  
+      },
       initBigChart(index) {
         let chartData = {
           datasets: [
@@ -174,7 +178,8 @@
       },
     },
     mounted() {
-      this.initBigChart(0);
+      this.reload()
+      this.initBigChart(0)
     }
   };
 </script>
