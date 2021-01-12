@@ -18,6 +18,8 @@ const state = {
         evaluation: null,
         state:null,
         createdDate: new Date(),
+        listNames: [],
+        listBytes: []
     },
     loading: false
 }

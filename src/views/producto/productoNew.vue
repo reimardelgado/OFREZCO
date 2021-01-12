@@ -16,7 +16,7 @@
               <div class="col-xl-12">
                 
                 <div height="450px" class="imagePreviewWrapper">
-                  <picture-input
+                  <!-- <picture-input
                     ref="pictureInput"
                     width="400"
                     height="400"
@@ -37,7 +37,9 @@
                     }"
                     @change="onChange"
                   >
-                  </picture-input>
+                  </picture-input> -->
+                  <file-drag-drop v-model="filelist">
+                  </file-drag-drop>
                 </div>
               </div>
             </div>
@@ -105,12 +107,12 @@
                   </div>
                   <div class="col-xl-12">
                     <textarea
-                        rows="4"
+                        rows="6"
                         class="form-control form-control-alternative"
                         placeholder="Descripción"
                         v-model="model.largeDescription"
                       >
-                        A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.
+                        
                     </textarea>
                   </div>
                 </div>
@@ -141,11 +143,13 @@
 <script>
 import { mapActions } from "vuex";
 import PictureInput from "vue-picture-input";
+import FileDragDrop from '../../components/FileDragDrop.vue';
 export default {
   components: {
     PictureInput    
   },
   data() {
+    FileDragDrop
     return {
       model: {
         id: null,
@@ -162,14 +166,31 @@ export default {
         evaluation: null,
         state:null,
         createdDate: new Date(),
+        listNames: [],
+        listBytes: []
       },
       previewImage: null,
+      filelist: [],
+      adjuntosFile: [],
+      adjuntosName: [],
     };
   },
   methods: {
     ...mapActions(["saveProduct"]),
     guardar() {
-      this.model.userName = this.model.email;
+
+      let attachement = this.filelist.filelist //this.file ? this.file.imageFile : null;  
+      
+      this.adjuntosFile = attachement.map(function(item) {
+        return convertDataURIToBinary(item.urlFile)
+      });
+      this.adjuntosName = attachement.map(function(item) {
+          return item.nameFile
+      });
+
+      this.model.userName = this.model.email
+      this.listNames = this.adjuntosName
+      this.listBytes = this.adjuntosFile
       this.saveProduct(this.model).then((result) => {
         console.log(result);
         if (result.data.error == 0) {
